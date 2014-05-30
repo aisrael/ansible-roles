@@ -1,0 +1,24 @@
+---
+- name: Install required packages
+  apt: pkg={{item}} update_cache=yes cache_valid_time=3600
+  with_items:
+    - python-pycurl
+    - ttf-dejavu
+
+- name: Add Jenkins apt-key
+  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key state=present
+
+- name: Add Jenkins repository
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' update_cache=yes
+
+- name: Install Jenkins via apt
+  apt: pkg=jenkins
+
+- name: Set jenkins user password
+  # openssl passwd -1 jenkins
+  user: name=jenkins password=$1$2Mu6/jPI$QpSJvOB2I4pSbv8IBCuz51 shell=/bin/bash
+  sudo: yes
+
+- name: Allow jenkins user to sudo (required for RVM)
+  lineinfile: dest=/etc/sudoers.d/jenkins create=yes line='jenkins ALL=NOPASSWD:ALL' mode=0440
+  sudo: yes

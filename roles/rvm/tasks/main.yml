@@ -1,0 +1,20 @@
+---
+- name: Debian Tasks
+  include: debian.yml
+  sudo: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+#- name: Install RVM
+#  command: su -l {{rvm_user}} -c '\curl -sSL https://get.rvm.io | bash -s stable'
+#  sudo: yes
+#
+#- name: Install Ruby
+#  command: su -l {{rvm_user}} -c 'rvm install --default {{ruby}}'
+#  sudo: yes
+#
+#- command: su -l {{rvm_user}} -c 'gem install mysql'
+#  sudo: yes
+
+- include: as_rvm_user.yml
+  sudo: yes
+  sudo_user: "{{rvm_user}}"

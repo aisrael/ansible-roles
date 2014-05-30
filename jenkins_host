@@ -1,0 +1,12 @@
+jenkins ansible_ssh_host=54.255.153.234 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[jenkins-servers]
+jenkins
+
+[jenkins-servers:vars]
+github_user=jenkins
+github_username=jenkins
+github_password=6TsOQFBPhBvJdih7xA4W0LkC
+ssh_key_dir=~/.ssh
+ssh_private_key=id_rsa
+ssh_public_key=id_rsa.pub

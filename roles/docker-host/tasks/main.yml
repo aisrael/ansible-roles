@@ -1,0 +1,48 @@
+---
+# apt-cache update only if last update is more than a day ago
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- include: update_kernel.yml
+  when: ansible_distribution_version == '12.04'
+
+- name: Enable memory and swap cgroup
+  lineinfile: dest=/etc/default/grub
+    regexp='^GRUB_CMDLINE_LINUX=""$'
+    line='GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
+    backrefs=yes
+  register: update_grub
+  sudo: yes
+
+- name: /usr/sbin/update-grub
+  command: /usr/sbin/update-grub
+  when: update_grub|changed
+  sudo: yes
+
+- name: Create docker group
+  group: name=docker
+  sudo: yes
+
+- name: Add {{ansible_user_id}} to docker group
+  user: name={{ansible_user_id}} groups=docker
+  sudo: yes
+
+- name: apt-get install required packages
+  apt: pkg={{item}} state=installed
+  with_items:
+    - curl
+    - python-pycurl
+  sudo: yes
+
+- name: Add Docker Key
+  apt_key: url=http://get.docker.io/gpg state=present
+  sudo: yes
+
+- name: Add Docker Repo
+  apt_repository: repo='deb https://get.docker.io/ubuntu docker main' state=present update_cache=yes
+  sudo: yes
+
+- name: apt-get install lxc-docker
+  apt: pkg=lxc-docker
+  sudo: yes

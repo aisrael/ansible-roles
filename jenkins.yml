@@ -1,0 +1,10 @@
+---
+- hosts: jenkins-servers
+  roles:
+    - common
+    - git-client
+    - docker-host
+    - mariadb
+    - jenkins-server
+    - github-client
+    - {role: rvm, rvm_user: 'jenkins' }

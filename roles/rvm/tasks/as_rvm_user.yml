@@ -1,0 +1,17 @@
+- name: Install RVM
+  shell: \curl -sSL https://get.rvm.io | bash -s stable creates=~/.rvm
+
+- name: Install Ruby
+  shell: rvm install --default {{ruby}} creates=~/.rvm/rubies/{{ruby}}
+
+- name: Check if mysql2 gem present
+  shell: gem list --local mysql2|tail -1
+  changed_when: false
+  register: mysql_gem
+- debug: msg="{{mysql_gem.stdout}}"
+
+# Make sure that this can install, normally not needed since will usually
+# be installed as part by Bundler on a per project basis, but just to make sure
+- name: Install gem mysql2
+  gem: name=mysql2 state=present user_install=no
+  when: mysql_gem.stdout == ""

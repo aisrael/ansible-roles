@@ -1,0 +1,12 @@
+---
+- name: Add MariaDB apt-key
+  apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xcbcb082a1bb943db
+
+- name: Install python-pycurl (needed by apt_repository task below)
+  apt: pkg=python-pycurl update_cache=yes cache_valid_time=3600
+
+- name: Add MariaDB repository
+  apt_repository: repo='deb {{mariadb.mirror_repo_url}} precise main' update_cache=yes
+
+- name: Install MariaDB headers
+  apt: pkg=libmariadbd-dev update_cache=yes cache_valid_time=3600

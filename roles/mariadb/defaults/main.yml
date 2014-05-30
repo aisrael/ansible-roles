@@ -1,0 +1,2 @@
+mariadb:
+  mirror_repo_url: 'http://download.nus.edu.sg/mirror/mariadb/repo/10.0/{{ansible_distribution|lower}}'

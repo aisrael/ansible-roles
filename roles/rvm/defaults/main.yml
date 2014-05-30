@@ -1,0 +1,2 @@
+rvm_user: "{{ansible_user_id}}"
+ruby: ruby-2.1.1

@@ -1,0 +1,15 @@
+---
+- name: Make sure ~/.ssh directory exists
+  file: path=~/.ssh state=directory mode=700
+  sudo: yes
+  sudo_user: "{{github_user}}"
+
+- name: Copy deployer private key to target
+  copy: src={{ssh_key_dir}}/{{ssh_private_key}} dest=~/.ssh/id_rsa mode=0600
+  sudo: yes
+  sudo_user: "{{github_user}}"
+
+- name: Copy depoyer  SSH public key to target
+  copy: src={{ssh_key_dir}}/{{ssh_public_key}} dest=~/.ssh/id_rsa.pub
+  sudo: yes
+  sudo_user: "{{github_user}}"

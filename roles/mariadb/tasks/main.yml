@@ -1,0 +1,5 @@
+---
+- name: Debian Tasks
+  include: debian.yml
+  sudo: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
