@@ -10,7 +10,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = 'ubuntu-12.04-server-amd64-vbox-4.3.10'
+  config.vm.box = 'trusty-server-cloudimg-amd64-vagrant-disk1'
+  config.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
 
   # Replace 'jenkins.yml' with the appropriate playbook (and make sure the group is set properly, too)
   config.vm.provision 'ansible' do |ansible|
