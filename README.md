@@ -1,7 +1,7 @@
 ansible-roles
 =============
 
-See the `Vagrantfile` for how to boot up a Vagrant/Virtualbox VM that get provisioned either 
+See the `Vagrantfile` for how to boot up a Vagrant/Virtualbox VM that gets provisioned either 
 as a Docker host or a Jenkins server.
 
 Or, see `jenkins_host` for a sample inventory file.
