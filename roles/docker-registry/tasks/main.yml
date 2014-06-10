@@ -1,0 +1,12 @@
+---
+- name: apt-get python-pip
+  apt: pkg=python-pip
+  sudo: yes
+
+- name: pip install docker.py
+  pip: name=docker-py
+  sudo: yes
+
+- name: docker pull registry
+  docker_pull: repo=registry
+
