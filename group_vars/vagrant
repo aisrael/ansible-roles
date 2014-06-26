@@ -1,2 +1,4 @@
+placeholder: 0
+
 #### Uncomment the following line if you have apt-cacher-ng running on the Vagrant host
 # apt_cache_ng_url: "http://10.0.2.2:3142"
