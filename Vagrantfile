@@ -18,15 +18,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
   end
 
-  config.vm.network :forwarded_port, guest: 5000, host: 5000
+  config.vm.network :private_network, ip: '192.168.100.200'
 
   # Replace 'jenkins.yml' with the appropriate playbook (and make sure the group is set properly, too)
   config.vm.provision 'ansible' do |ansible|
     ansible.host_key_checking = false
-    ansible.playbook = 'docker.yml'
+    ansible.playbook = 'consul.yml'
     ansible.groups = {
         'vagrant' => ['default'],
-        'docker-hosts' => ['default']
+        'consul' => ['default']
     }
   end
 

@@ -1,0 +1,14 @@
+# apt-cache update only if last update is more than a day ago
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  sudo: yes
+
+- name: Install required packages
+  apt: pkg={{item}}
+  with_items:
+    - unzip
+  sudo: yes
+
+- name: Unarchive 0.3.0_linux_amd64.zip
+  unarchive: src=0.3.0_linux_amd64.zip dest=/usr/local/bin/
+  sudo: yes
