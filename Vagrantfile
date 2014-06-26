@@ -20,13 +20,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :private_network, ip: '192.168.100.200'
 
-  # Replace 'jenkins.yml' with the appropriate playbook (and make sure the group is set properly, too)
   config.vm.provision 'ansible' do |ansible|
     ansible.host_key_checking = false
-    ansible.playbook = 'consul.yml'
+    ansible.playbook = 'playbook.yml'
     ansible.groups = {
-        'vagrant' => ['default'],
-        'consul' => ['default']
+        'vagrant' => %(default),
+        'consul' => %(default),
+        'docker-hosts' => %(default)
     }
   end
 

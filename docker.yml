@@ -1,4 +1,0 @@
----
-- hosts: docker-hosts
-  roles:
-    - docker-registry

@@ -1,4 +1,16 @@
 ---
+- hosts: consul
+  roles:
+    - consul
+
+- hosts: docker-hosts
+  roles:
+    - docker-host
+
+- hosts: docker-registries
+  roles:
+    - docker-registry
+
 - hosts: jenkins-servers
   roles:
     - common
@@ -8,3 +20,4 @@
     - jenkins-server
     - github-client
     - {role: rvm, rvm_user: 'jenkins' }
+
